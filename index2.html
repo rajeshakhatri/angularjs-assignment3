@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app='ShoppingListApp'>
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>    <title>Custom Service</title>
+  </head>
+  <body>
+    <h1>Shopping List Check Off</h1>
+
+    <!-- To Buy List -->
+    <h2>To Buy:</h2>
+    <div ng-controller='ToBuyController as ToBuy'>
+      <ol>
+        <li ng-repeat="item in ToBuy.itemsBuy">
+          {{ item.quantity }} of {{ item.name }}
+          <button ng-click="ToBuy.removeItem($index);">Buy Item</button>
+        </li>
+      </ol>
+      <div class="emptyMessage">{{ ToBuy.BuyMessage }}.</div>
+    </div>
+
+    <!-- Already Bought List -->
+    <h2>Already Bought:</h2>
+    <div ng-controller='AlreadyBoughtController as AlreadyBought'>
+
+      <ol>
+        <li ng-repeat="item in AlreadyBought.itemsBought">
+          {{ item.quantity }} of {{ item.name }}
+          <!--<button ng-click="AlreadyBought.removeItemBought($index);">Remove Item</button>-->
+        </li>
+      </ol>
+        <!--<div class="emptyMessage">{{ AlreadyBought.BoughtMessage }}.</div>-->
+         <div ng-if="!AlreadyBought.itemsBought.length>0" class="error">{{AlreadyBought.BoughtMessage}}</div>
+      <!--<div ng-hide="!AlreadyBought.BoughtMessage" class="error">Error: {{AlreadyBought.BoughtMessage}}</div>-->
+    </div>
+  </body>
+</html>
